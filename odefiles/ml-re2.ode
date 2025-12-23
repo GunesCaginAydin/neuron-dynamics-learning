@@ -1,0 +1,40 @@
+2
+# the number of things to plot is 2
+
+#Hints: 
+#SNIC: 39..96
+#HB, sub: 97.79
+#Bistability region in [97.79,116.1], no biologically plausible
+
+
+# declare the variables setting v(0) to rest and w(0)=0
+variable v=-60, w=0
+
+# declare other stuff to plot
+# aux ica
+
+# declare the parameters
+param i=0,v3=12,gl=2,gca=4.0,gk=8.0
+param v1=-1.2,v2=18, v4=17.4
+param vl=-60,vca=120,vk=-84
+param c=20,phi=0.066667
+
+# user defined functions
+user minf 1 0.5*(1+tanh((arg1-v1)/v2))
+user winf 1 0.5*(1+tanh((arg1-v3)/v4))
+user tauw 1 1/(cosh((arg1-v3)/(2*v4)))
+
+# right-hand sides of ODES in order of declaration
+odev (i+gl*(vl-v)+gca*minf(v)*(vca-v)+gk*w*(vk-v))/c
+ow phi*(winf(v)-w)/tauw(v)
+
+@ total=100
+@ maxstor=1e5,meth=stiff,dt=0.01
+@ bound=100000,xp=v,yp=w
+@ xlo=-100,xhi=50,ylo=0,yhi=1
+
+#AUTO parameters
+@ autoymin=-90,autoymax=50,autoxmin=-20,autoxmax=130
+@ parmin=-100,parmax=300,ds=0.01, dsmin=0.0001, dsmax=1 
+
+done

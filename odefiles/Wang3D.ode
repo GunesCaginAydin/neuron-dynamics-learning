@@ -1,0 +1,46 @@
+# wangs pyramid cell model reduced (m=minf)
+# SNIC at i=0.2257, Hopf at i=108.3
+
+par i=-1
+par phi=4
+par gl=0.1,gna=45,gk=18
+par vl=-65,vna=55,vk=-80,vca=120
+
+v(0)=-65
+h(0)=0.9
+n(0)=0.1
+
+# leak
+il=gl*(v-vl)
+
+# sodium
+am=-0.1*(v+33)/(exp(-0.1*(v+33))-1)
+bm=4*exp(-(v+58)/12)
+#m'=phi*(am*(1-m)-bm*m)
+minf=am/(am+bm)
+ina=gna*minf^3*h*(v-vna)
+ah=0.07*exp(-(v+50)/10)
+bh=1/(1+exp(-0.1*(v+20)))
+
+
+# delayed rectifier
+ik=gk*(n^4)*(v-vk)
+an=0.01*(v+34)/(1-exp(-0.1*(v+34)))
+bn=0.125*exp(-(v+44)/25)
+
+v'=-il-ina-ik+i
+h'=phi*(ah*(1-h)-bh*h)
+n'=phi*(an*(1-n)-bn*n)
+
+@ total=50
+@ maxstor=100000,meth=euler,dt=0.05
+@ xlo=-90,xhi=50,ylo=0,yhi=1,xp=v,yp=n
+@ bound=100000
+
+#AUTO parameters
+@ autoymin=-120,autoymax=60,autoxmin=-250,autoxmax=350
+@ parmin=-1000,parmax=1000,dsmax=3,ds=0.002,dsmin=0.00001
+d
+
+
+
