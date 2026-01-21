@@ -1,0 +1,21 @@
+hyperparameters:
+  cnn:
+    width: 3
+    depth: 5
+    timesteps: 100
+
+  transformer:
+    head: 8
+    layer: 12
+    embedding: 192
+
+  wavenet:
+    wavelon: 1000
+
+training:
+  input: "weiner"
+  mode: 1
+  model: "Moris-Lecar"
+
+benchmarking:
+  input: "weiner"
