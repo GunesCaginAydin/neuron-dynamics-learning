@@ -2,9 +2,8 @@ from numba import njit, types
 from numba.typed import Dict
 import numpy as np, sys
 
-from Wavenet.evaluation import evaluation
 from configuration import config
-from Wavenet.training import training
+
 
 @njit(cache=True, fastmath=True, nogil=True)
 def MLecar(dic, Iapps, noise, w0, v0):

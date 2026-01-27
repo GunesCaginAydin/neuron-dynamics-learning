@@ -1,3 +1,6 @@
+defaults:
+  - training.yaml
+
 hyperparameters:
   cnn:
     width: 3
@@ -19,3 +22,10 @@ training:
 
 benchmarking:
   input: "weiner"
+
+logging:
+
+multi_run:
+
+hydra:
+
